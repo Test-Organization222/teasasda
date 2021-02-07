@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package keygen;
+
+//empty.proto is used to have a rpc function with empty input, otherwise proto file is not compiled.
+import "google/protobuf/empty.proto";
+
+service keygenSrv{
+        rpc GetKey(google.protobuf.Empty) returns (Key){}
+}
+
+message Key {
+    string id=1;
+}
+
+

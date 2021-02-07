@@ -1,15 +1,12 @@
 package pastebin
 
-type KeyGenerator interface {
-	// GetKey() (key string, err error)
+// KeyService provides the system with the unique keys.
+type KeyService interface {
+	GetKey() (key string, err error)
 }
 
-type ObjectStorage interface {
-	// GetPaste(key string) (key Paste, err error)
-	// StorePaste(paste Paste) (key string, err error)
-}
-
-type MetadataStorage interface {
-	// GetPasteBody(objId string) (pasteBody string, err error)
-	// StorePasteBody(pasteBody string) (objId string, err error)
+//Storage stores and retrieves pastes.
+type Storage interface {
+	GetPaste(key string) (Paste, error)
+	StorePaste(paste Paste) (Paste, error)
 }

@@ -1,6 +1,7 @@
 package pastebin
 
-// Paste is what user wants to store in the system
+// Paste is the object user stores in the system
 type Paste struct {
-	// Key string
+	Key  string
+	Body string
 }

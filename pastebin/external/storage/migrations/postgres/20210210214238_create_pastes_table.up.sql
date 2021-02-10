@@ -1,0 +1,4 @@
+CREATE TABLE "pastes" (
+    id VARCHAR(8) NOT NULL PRIMARY KEY,
+    body TEXT NOT NULL
+);

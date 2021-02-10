@@ -8,5 +8,5 @@ type KeyService interface {
 //Storage stores and retrieves pastes.
 type Storage interface {
 	GetPaste(key string) (Paste, error)
-	StorePaste(paste Paste) (Paste, error)
+	StorePaste(paste Paste) error
 }

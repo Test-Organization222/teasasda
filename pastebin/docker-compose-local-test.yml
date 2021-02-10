@@ -1,0 +1,12 @@
+version: "3"
+services:
+  pastebin-test-db:
+    image: postgres:latest
+    # logging:
+    #   driver: none
+    environment:
+      POSTGRES_DB: pastebin
+      POSTGRES_USER: pastebin
+      POSTGRES_PASSWORD: pastebin
+    ports:
+      - "5444:5432"

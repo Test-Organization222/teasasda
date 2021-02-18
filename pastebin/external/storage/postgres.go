@@ -2,7 +2,9 @@ package storage
 
 import (
 	"database/sql"
+	"fmt"
 
+	"github.com/lib/pq"
 	"github.com/stdapps/pastebin/pastebin"
 )
 
@@ -31,5 +33,13 @@ func (p Postgres) GetPaste(key string) (pastebin.Paste, error) {
 // StorePaste persists a Paste to database
 func (p Postgres) StorePaste(paste pastebin.Paste) error {
 	_, err := p.db.Exec("INSERT INTO pastes (id, body) VALUES($1, $2);", paste.Key, paste.Body)
+
+	if err != nil {
+		pErr, ok := err.(*pq.Error)
+		// check if violates pastes_pkey unique constraint
+		if ok && pErr.Code == "23505" && pErr.Message == `"duplicate key value violates unique constraint "pastes_pkey""` {
+			return fmt.Errorf("%w: %s", pastebin.ErrKeyExists, err)
+		}
+	}
 	return err
 }
